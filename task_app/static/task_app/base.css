@@ -1,0 +1,28 @@
+.user-info {
+    font-family: 'Arial', sans-serif; /* Add your preferred font family */
+    font-size: 16px;
+    color: #333; /* Adjust the text color */
+}
+
+.username {
+    font-weight: bold;
+    color: #000000; /* Customize the color for the username */
+    margin-right: 5px; /* Adjust spacing between username and logout link */
+}
+
+.logout-link {
+    color: #dc3545; /* Customize the color for the logout link */
+    text-decoration: none;
+    margin-left: 5px; /* Adjust spacing between username and logout link */
+}
+
+.logout-link:hover {
+    text-decoration: underline; /* Add underline on hover for the logout link */
+}
+.hello{
+    position: absolute;
+    height: 100;
+    left: 40px;
+    width: 66px;
+    top: 10px;
+}
