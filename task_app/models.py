@@ -19,14 +19,21 @@ class Collect(models.Model):
     description = models.TextField()
     amount_to_achieve = models.CharField(max_length=100, default='Infinitive')
     current_amount = models.IntegerField()
-    amount_donations = models.IntegerField()
+    # amount_donations = models.IntegerField()
     image = models.ImageField(upload_to='covers/')
     date_finish = models.DateTimeField()
     when_created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.name
+
     @property
     def donations(self):
         return Collect.objects.filter(collect=self)
+
+    @property
+    def amount_donations(self):
+        return self.payment_set.count()
 
     class Meta:
         verbose_name = 'Collect'
