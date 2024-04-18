@@ -4,6 +4,8 @@ from django.contrib.auth import login, logout
 from .forms import AddGroupDonationForm, AddAmountForm
 from django.views.generic import CreateView, DetailView, UpdateView
 from .models import Collect, Payment
+from django.conf import settings
+from django.core.mail import send_mail
 # Create your views here.
 
 def index(request):
@@ -38,6 +40,13 @@ class AddGroupDonation(CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+
+        subject = 'Group donation created successfully'
+        message = 'Your group donation has been created successfully.'
+        from_email = settings.DEFAULT_FROM_EMAIL
+        to_email = [self.request.user.email]
+        send_mail(subject,message,from_email,to_email)
+
         return super().form_valid(form)
 
 class about(DetailView):
@@ -87,6 +96,12 @@ def add_amount(request, pk):
             instance = Collect.objects.get(pk=pk)
             instance.current_amount += amount
             instance.save()
+            subject = 'Payment sent successfully'
+            message = 'Your payment has been sent successfully.'
+            from_email = settings.DEFAULT_FROM_EMAIL
+            to_email = [request.user.email]
+            send_mail(subject, message, from_email, to_email)
+
             return redirect('home')
 
 
