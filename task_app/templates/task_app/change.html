@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="{% static 'task_app/index.css' %}">
+
+    <style>
+
+        .job-form-container {
+            max-width: auto px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .job-form-container label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .job-form-container input,
+        .job-form-container textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        .job-form-container button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .job-form-container button:hover {
+            background-color: #45a049;
+        }
+        .a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .a:hover {
+            background-color: #0056b3;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="job-form-container">
+    <h2>Update Form</h2>
+    <form method="post" enctype="multipart/form-data" action="{% url 'change' object.id %}">
+        {% csrf_token %}
+
+        <label for="{{ form.name.id_for_label }}"><b>name:</b></label>
+        {{ form.name }}
+
+        <label for="{{ form.image.id_for_label }}"><b>Image:</b></label>
+        {{ form.image }}
+
+        <label for="{{ form.occasion.id_for_label }}"><b>occasion:</b></label>
+        {{ form.occasion }}
+
+        <label for="{{ form.description.id_for_label }}"><b>description:</b></label>
+        {{ form.description }}
+
+        <label for="{{ form.current_amount.id_for_label }}"><b>current_amount:</b></label>
+        {{ form.current_amount }}
+
+        <label for="{{ form.date_finish.id_for_label }}"><b>date_finish:</b></label>
+        {{ form.date_finish }}
+
+
+        <br>
+        <br>
+        {% if form.errors %}
+            <ul>
+        {% for field in form %}
+            {% for error in field.errors %}
+                <li>{{ field.label }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+            </ul>
+        {% endif %}
+        <button type="submit">Submit</button>
+    </form>
+    <br>
+    <br>
+    <a class='a' href="{% url 'home' %}">To Home</a>
+</div>
+</body>
+</html>

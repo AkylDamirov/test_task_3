@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'task_app/index.css' %}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .h2 {
+            color: black;
+        }
+
+        .p {
+            line-height: 1.6;
+            color: #343a40;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .posted-info {
+            color: #6c757d;
+        }
+
+        .a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .a:hover {
+            background-color: #0056b3;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img class="card-img-top" src="{{ events.image.url }}"  style='max-width: 6%; height: 100' alt="{{ job.name }} Image">
+        <br>
+        <h6>Name:</h6><b><h4>{{ events.name }}</h4></b>
+        <b><h6>Occasion:</h6>
+            <h4 class="p">{{ events.occasion }}</h4>
+        </b>
+        <h6 class="p">Current amount:</h6>
+            <b><h4>${{ events.current_amount }}</h4></b>
+        <h6 class="p">Amount to achieve:</h6>
+            <b><h4>{{ events.amount_to_achieve }}</h4></b>
+        <br>
+        <b><h6>Description:</h6></b>
+        <hr>
+        <div class="text">
+            <p class="h2">{{ events.description|linebreaks }}</p>
+            <hr>
+        </div>
+
+        <h6 class="p">Open to:</h6>
+            <b><h5>{{ events.date_finish }}</h5></b>
+
+        <br>
+<!--        This Vacancy was created by: {{job.creator}}-->
+        <p class="posted-info p">Posted on: {{ events.when_created }}</p>
+    </div>
+    <br>
+<a class="a" href="{% url 'home' %}">To Home</a>
+</body>
+</html>

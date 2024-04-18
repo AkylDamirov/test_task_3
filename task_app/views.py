@@ -40,4 +40,18 @@ class AddGroupDonation(CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+class about(DetailView):
+    model = Collect
+    template_name = 'task_app/about.html'
+    context_object_name = 'events'
+
+class UpdateGroupDonation(UpdateView):
+    model = Collect
+    form_class = AddGroupDonationForm
+    template_name = 'task_app/change.html'
+    success_url = '/'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
 
