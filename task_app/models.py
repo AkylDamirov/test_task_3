@@ -7,6 +7,7 @@ class Payment(models.Model):
     amount = models.IntegerField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     collect = models.ForeignKey('Collect', on_delete=models.CASCADE)
+    FIO = models.CharField(max_length=100)
     datetime = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -23,6 +24,7 @@ class Collect(models.Model):
     image = models.ImageField(upload_to='covers/')
     date_finish = models.DateTimeField()
     when_created = models.DateTimeField(auto_now_add=True)
+    FIO = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name

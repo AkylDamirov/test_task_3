@@ -1,7 +1,7 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, HttpResponseRedirect
 from .forms import NewUserForm
 from django.contrib.auth import login, logout
-from .forms import AddGroupDonationForm
+from .forms import AddGroupDonationForm, AddAmountForm
 from django.views.generic import CreateView, DetailView, UpdateView
 from .models import Collect, Payment
 # Create your views here.
@@ -54,4 +54,41 @@ class UpdateGroupDonation(UpdateView):
     def form_valid(self, form):
         return super().form_valid(form)
 
+def delete1(request, id=None):
+    group = Collect.objects.get(id=id)
+    group.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def profile(request):
+    user = request.user
+    if user.is_authenticated:
+        events = Collect.objects.filter(author=user)
+        context = {'events':events[::-1]}
+        return render(request, 'task_app/profile.html', context)
+    else:
+        return redirect('login')
+
+def add_amount(request, pk):
+    payments = Payment.objects.filter(pk=pk)
+    form = AddAmountForm()
+    collect_instance = Collect.objects.get(pk=pk)
+    if request.method=='POST':
+        form = AddAmountForm(request.POST)
+        if form.is_valid():
+            amount = form.cleaned_data['amount']
+            FIO = form.cleaned_data['FIO']
+
+            payment = Payment.objects.create(
+                amount=amount,
+                user=request.user,
+                collect=collect_instance,
+                FIO = FIO
+            )
+            instance = Collect.objects.get(pk=pk)
+            instance.current_amount += amount
+            instance.save()
+            return redirect('home')
+
+
+    return render(request, 'task_app/add_amount.html', {'form': form, 'collect':collect_instance, 'payments':payments})
 

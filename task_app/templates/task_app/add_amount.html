@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add Amount</button>
+</form>
+<h4>Number of people who made donations: {{ collect.amount_donations }}</h4>
+<h3>Payments:</h3>
+  <ul>
+    {% for payment in collect.payment_set.all %}
+      <li>amount: {{ payment.amount }}$ - Sent by: {{ payment.FIO }} - Date: {{payment.datetime}}</li>
+    {% empty %}
+      <li>No payments yet.</li>
+    {% endfor %}
+  </ul>
+<br>
+    <a class='a' href="{% url 'home' %}">To Home</a>
+</body>
+</html>

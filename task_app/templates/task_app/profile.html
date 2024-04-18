@@ -15,7 +15,7 @@
         <ul class="nav ms-auto">
             {% if user.is_authenticated %}
                 <div class="user-info">
-                    <a href="{% url 'profile' %}">
+                    <a href="{% url 'home' %}">
                         <span class="username btn btn-outline-dark">{{ user.username }}</span>
                     </a>
     <a href="{% url 'logout2' %}" class="logout-link btn btn-dark">Log Out</a>
@@ -31,7 +31,6 @@
             {% endif %}
         </ul>
     </div>
-
 </nav>
 <header class="py-3 mb-4 border-bottom">
     <div class="container d-flex flex-wrap justify-content-between align-items-center">
@@ -42,7 +41,7 @@
 <!--</div>-->
 </header>
 
-<h3>Recent Events</h3>
+<h3>Your Events</h3>
 <hr>
 <div class="row">
     {% for i in events %}
@@ -60,8 +59,11 @@
                 <br>
 <!--                <p class="card-text">{{i.description|truncatechars_html:43}}</p>-->
                 <hr>
+                <a href="{% url 'change' i.id %}">
+               <button data-product='{{i.id}}' class="btn btn-outline-secondary add-btn update-cart">Edit</button>
+                </a>
                 <a href="{% url 'about' i.id %}" class="btn btn-outline-success">Learn more</a>
-                <a href="{% url 'add_amount' i.id %}" class="btn btn-outline-success">Participate</a>
+                <a href="{% url 'delete1' i.id %}" class="btn btn-danger">Delete</a>
                 <br>
                 <br>
                 <h4 style="display: inline-block; float: right;"><strong>amount to achieve: {{i.amount_to_achieve}}</strong></h4>

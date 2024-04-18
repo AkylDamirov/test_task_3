@@ -57,9 +57,11 @@
 </head>
 <body>
 <div class="job-form-container">
-    <h2>Job Form</h2>
+    <h2>Donation Group Form</h2>
     <form method="post" enctype="multipart/form-data" action="{% url 'add_group' %}">
         {% csrf_token %}
+        <label for="{{ form.name.id_for_label }}"><b>Your surname and name:</b></label>
+        {{ form.FIO }}
 
         <label for="{{ form.name.id_for_label }}"><b>name:</b></label>
         {{ form.name }}
