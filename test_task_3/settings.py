@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'task_app'
+    'task_app',
+    'drf_yasg',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -132,3 +134,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'tutest709@gmail.com'
 EMAIL_HOST_PASSWORD = 'fbqh earu oxul njrf'
 EMAIL_FILE_PATH = BASE_DIR / 'emails'
+
+ALLOWED_HOSTS = ['0.0.0.0']
