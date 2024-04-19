@@ -27,6 +27,7 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
+
 class AddGroupDonation(CreateView):
     model = Collect
     form_class = AddGroupDonationForm
