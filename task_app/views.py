@@ -78,6 +78,8 @@ def profile(request):
         return redirect('login')
 
 def add_amount(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('login')
     payments = Payment.objects.filter(pk=pk)
     form = AddAmountForm()
     collect_instance = Collect.objects.get(pk=pk)
